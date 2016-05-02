@@ -1,4 +1,4 @@
-# Book Starter Boilerplate
+# JavaScript functions, closures, and prototypes
 
 This is a boilerplate that you can use to self-publish books on Epub. In addition to that, you'll get outputs in all possible formats that you can distribute anywhere, including the Amazon Kindle.
 
