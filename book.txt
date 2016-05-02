@@ -1,0 +1,6 @@
+---
+title: JavaScript Functions, Closures, and Prototypes
+author: Amin Meyghani
+rights:  Creative Commons Non-Commercial Share Alike 3.0
+language: en-US
+...
