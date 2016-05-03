@@ -10,3 +10,11 @@
 var fn = function () {};
 typeof fn; // -> 'function'
 
+var fnRef = function fnObject () {};
+fnRef.someProp = 'foo';
+fnRef.hello = function () {
+  return 'hello';
+};
+
+fnRef.someProp// -> 'foo'
+fnRef.hello() // -> 'hello'
