@@ -1,0 +1,22 @@
+# Welcome
+
+Welcome to functions, closures, and prototypes in JavaScript.
+
+## Outline
+
+The book outline....
+
+**TODO**
+
+## Setup
+
+You can use the Chrome dev tools to interact with JavaScript. You can also install Node on your machine and interact with it in the terminal.
+
+### Running JavaScript in Chrome DevTools
+
+**TODO**
+
+### Running JavaScript with Node
+
+**TODO**
+
