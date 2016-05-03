@@ -4,9 +4,11 @@ Welcome to functions, closures, and prototypes in JavaScript.
 
 ## Outline
 
-The book outline....
+In *Chapter 1* we will explore the fundamentals of functions. How to create functions, how to execute them, how to use them as objects and more.
 
-**TODO**
+In *Chapter 2* we will look at closures.
+
+In *Chapter 3* we will look at prototype objets.
 
 ## Setup
 

@@ -1,3 +1,3 @@
-chapter0-setup.md
+chapter0-welcome.md
 chapter1-intro.md
 chapter2-functions.md

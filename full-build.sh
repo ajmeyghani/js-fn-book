@@ -9,6 +9,6 @@
 #
 
 # commit and push to leanpub....
-# git add --all
-# git commit -m 'build'
-# git push origin master
+git add --all
+git commit -m 'build'
+git push origin master
