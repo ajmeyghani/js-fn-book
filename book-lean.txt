@@ -1,3 +1,6 @@
-chapter0-welcome.md
+chapter0-preface.md
 chapter1-intro.md
 chapter2-functions.md
+chapter3-closures.md
+chapter4-prototypes.md
+chapter5-interview-questions.md
