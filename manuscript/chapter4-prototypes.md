@@ -2,7 +2,7 @@
 
 There are different ways to interpret the prototype concept in JavaScript, but you can explain in it very easily in one sentence:
 
-> "In JavaScript, prototypes are objects that facilitate the linking of objects"
+> "In JavaScript, prototypes are objects that facilitate linking of objects and delegation of methods or properties"
 
 That's really it. The most confusing part about the prototype concept is just the terminology, but the concept itself is pretty straightforward. The diagram below demonstrates the idea in more detail:
 
@@ -293,6 +293,152 @@ By doing those, consumers won't have to call the constructor with `new` which is
 That's pretty much all you need to know to be able to use prototype objects. However, you should be aware of great libraries out there, such as [Stampit](https://github.com/stampit-org/stampit) that are much more powerful and flexible than the classical approach and allow you to do much more. In the next section we will explore the effect of inheritance through functional mixins.
 
 ## Functional Mixins Over Classical Inheritance
+
+The core idea behind mixins is that you can augment an existing entity with another. Now this entity can be anything, a plain object, a function, or a prototype object. You can either mixin objects with each other or mixin an object with functions. In this section we are going to focus on functional mixins since they are very flexible and convenient when working with JavaScript. In addition, functional mixins are very different than classical inheritance and introduce a different a way of thinking.
+
+The idea behind functional mixins is very simple: you define a bunch of functionalities, and you specify the context to which these functions apply. Let's look at a very simple example:
+
+```javascript
+/*
+ * Define functionalities
+ * Grouped by `fns` here.
+ */
+function fns() {
+  this.getName = function() {
+    return this.name;
+  };
+}
+
+/* Define Type */
+function Person(name) {
+  if (!(this instanceof Person)) {
+    return new Person(name);
+  }
+  this.name = name;
+}
+
+/* Apply the functionalities to the
+prototype object of Person */
+fns.call(Person.prototype);
+
+/* make an instance of Person */
+const person = Person('Amin');
+
+/* call methods */
+person.getName() //-> 'Amin'
+```
+
+In the example above, we first create a function that contains the functionalities of a type. Then we define the type and finally we apply the functionalities to the type by calling the `fns` function in the context of the type's prototype object. That's all it takes to add functionalities to the type. Now the interesting thing to note here is that you can create more functions and group other pieces of functionalities and then apply it to the type. In order to demonstrate that, let's redo the example in the previous section with this functional mixins.
+
+If you remember from the previous section, we created the `Developer` type that had the functionalities of a `Person`, `Worker`, and `Developer`. So, let's define the functionalities for each of these first:
+
+```javascript
+/* Define Person's functionalities */
+function personFns() {
+  this.walk = function () {
+    return 'Walking ...';
+  };
+  this.getName = function () {
+    return this.name;
+  };
+}
+
+/* Define Worker's functionalities */
+function workerFns() {
+  this.work = function () {
+    return 'Working ...';
+  };
+}
+
+/* Define Developer's functionalities */
+function developerFns() {
+  this.code = function () {
+    return 'Coding ...';
+  };
+}
+```
+
+Now that we have defined the groups of functionalities, then, we need to define the `Developer` type:
+
+```javascript
+/* Define the Developer type */
+function Developer(name) {
+  if (!(this instanceof Developer)) {
+    return new Developer(name);
+  }
+  this.name = name;
+  this.toString = function () {
+    return this.name;
+  };
+}
+```
+
+After that, we need to apply each functionalities to the Developer's prototype:
+
+```javascript
+/* apply each functionalities to
+Developer's prototype */
+[personFns, workerFns, developerFns].forEach(fn => {
+  fn.call(Developer.prototype);
+});
+```
+
+Now we can create an instance of the `Developer` and call any of the methods:
+
+```javascript
+/* create an instance and call methods */
+const dev = Developer('Amin');
+console.log(dev.getName());
+console.log(dev.walk());
+console.log(dev.work());
+console.log(dev.code());
+console.log('Dev is: ' + dev);
+```
+
+After running the code above you should get the following output:
+
+```bash
+Amin
+Walking ...
+Working ...
+Coding ...
+Dev is: Amin
+```
+
+And that's how you can use functional mixins to augment a type. Also note that the context object `this`, always refers to the created instance object. Now that we have learned what functional mixins are, let's see how we can improve the performance by forming a closure around the mixins to cache the result of the first definition call:
+
+
+```javascript
+const personFns = (function() {
+  function walk() {return 'Walking...';}
+  function getName() {return this.name;}
+  return function() {
+    this.walk = walk;
+    this.getName = getName;
+    return this;
+  };
+}());
+
+const workerFns = (function() {
+  function work() {return 'working...';}
+  return function() {
+    this.work = work;
+    return this;
+  };
+}());
+
+const developerFns = (function() {
+  function code() {return 'coding...';}
+  return function() {
+    this.code = code;
+    return this;
+  };
+}());
+```
+
+All we did here was wrapping each function with a closure, the rest of the code is the same. Now, the effect that this has on performance is noticeable because when the outer function is called, there result is always cached because the inner function references the outer function methods.
+
+
 
 
 
