@@ -15,7 +15,7 @@ If a statement starts with the `function` keyword, then you have a function decl
 
 But if you assign a function to a variable, you have a function expression:
 
-`var fnRef = function myFn() {};`
+`const fnRef = function myFn() {};`
 
 **Note** that you need a semi colon at the end of a function expression, but there are no semi colons at the end of function declarations.
 
@@ -39,11 +39,37 @@ A function can be executed. This is generally known as calling a function. You c
 add();
 ```
 
-Notice that we are calling the functions wihtout any inputs. Let's give the function to numbers as inputs:
+Notice that we are calling the functions without any inputs. Let's give the function to numbers as inputs:
 
 ```javascript
 add(1,2); // -> 3
 ```
+
+In addition to the `()` operator, there are 3 other ways to invoke a function. That is, using:
+
+- `call`
+- `apply`
+- and the `new` keyword before invoking the function with `()`
+
+So for our simple example, let's call the function using all these methods and explore when you would want to use each method.
+
+### `Function.prototype.call`
+
+**TODO**
+
+### `Function.prototype.apply`
+
+**TODO**
+
+### Calling Function with `new`
+
+**TODO**
+
+
+
+
+
+
 
 
 ## Functions as objects
