@@ -182,6 +182,8 @@ First, check if the function of interest is called with the `new` keyword. If so
 
 Let's look at some examples and see how the context object is bound to.
 
+#### Call with `new`
+
 The first example, is just a review from the previous section. That is calling a function with the `new` keyword. When you can a function with the `new` keyword, the context object is bound to the instance object created by the function:
 
 ```javascript
@@ -193,7 +195,11 @@ const myCar = new Car();
 
 To figure out how `this` is bound, we look at the line where the function is called. In this case, the function is called with the `new` keyword, so then we know that the context is bound to the new object that is going to be returned by the function. This is the case that you always have to check first, because it over rules the other ones.
 
-In the next example, we are going to call a function with `call` and `apply`:
+In the next example, we are going to call a function with `call` and `apply`.
+
+#### Using `call` or `apply`
+
+Let's see how the value of `this` gets bound when we call a function with `call` or `apply`. For this example, we are going to create a simple function called `printMessage` that is going to read the `name` property on this and return a message:
 
 ```javascript
 function printMessage(msg) {
@@ -218,6 +224,8 @@ function printMessage(msg) {
 const message = printMessage.apply({name: 'Amin'}, ['Welcome!']);
 ```
 The output is the same as the `call` example, and the important thing to note here is that when you call a function with `call` or `apply`, the first argument is the context object that will be used inside the function as `this`.
+
+#### Implicit Binding
 
 The next case, to look in order, is when a function is called in the context of another object. So first let's create an object and define a method on it and then call the method in the context of the object:
 
